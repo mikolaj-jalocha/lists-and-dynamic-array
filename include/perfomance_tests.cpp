@@ -14,10 +14,17 @@
 void runStructureMenu() {
     int structureChoice;
     int operationChoice;
+
+    // jesli pliki juz istnieja nie generuj nowych
+    // generowanie plików źródłowych 5000_1 5000_2 5000_3   10000_1 10000_2 itd.
+
     std::cout<<"Choose the structure:\n1-Array list\n2-Singly linked list\n3-Doubly linked list\n";
     std::cin >> structureChoice;
     std::cout << "Choose the operation:\n1 - Push first\n2 - Push last\n3 - Push at index\n4 - Remove first\n5 - Remove last\n6 - Remove at index\n7 - Search\n";
     std::cin>>operationChoice;
+
+
+    // add option for generating all at once
 
     switch (structureChoice) {
             case 1: {
@@ -45,6 +52,8 @@ unsigned long long performanceTests(T& structure, int operation, int n, int inde
     //create copies of structure to perform reliable test for each one operation
     std::vector<T> copies(100, structure);
     std::string fileName= " ";
+
+    int REPETITION = 100;
 
     //switch case for all methods
     switch (operation) {
@@ -147,7 +156,10 @@ void testsForGeneratedNumbers(T& structure, const std::string& structureName, in
         RandomNumbersFile.close();
 
         std::vector<unsigned long long> resultSet;
-        for (int j=0; j<3; j++) {
+        for (int j=1; j<4; j++) {
+
+            // tutaj za kazdym razem wypelniamy strukture innym datasetem, potrzebna bedzie nazwa pliku: set_i np 5000_1, 5000_2, 5000_3
+
             unsigned long long result = performanceTests(structure, operationChoice, testValue, testIndex);
             resultSet.push_back(result);
         }
